@@ -1,11 +1,21 @@
-package com.usersapp.usersapp.dto;
+package com.usersapp.usersapp.models;
 
-public class CreateUserDto {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+public class CreateUserRequestModel {
 
     private String name;
     private String surname;
     private int age;
+
+    @Email
+    @NotNull
     private String email;
+
+    @NotNull
+    @Size(min = 6)
     private String password;
 
     public String getEmail() {
