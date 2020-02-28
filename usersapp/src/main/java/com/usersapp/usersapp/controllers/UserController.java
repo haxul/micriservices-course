@@ -33,7 +33,7 @@ public class UserController {
         return "Current port " + environment.getProperty("local.server.port");
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<CreateUserResponseModel> createUser(@Valid @RequestBody CreateUserRequestModel createUserRequestModel) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
