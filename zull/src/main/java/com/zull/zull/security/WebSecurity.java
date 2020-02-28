@@ -23,9 +23,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf();
         http.headers().frameOptions().disable();
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users-ws/users/signup").permitAll()
-                .antMatchers(HttpMethod.POST, "/users-ws/users/login").permitAll()
                 .anyRequest().authenticated()
+                .antMatchers(HttpMethod.POST, environment.getProperty("signup.path")).permitAll()
+                .antMatchers(HttpMethod.POST, environment.getProperty("login.path")).permitAll()
                 .and()
                 .addFilter(new AuthFilter(authenticationManager(), environment));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
