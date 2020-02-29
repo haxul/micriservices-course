@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AuthFilter extends UsernamePasswordAuthenticationFilter {
@@ -38,7 +39,8 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try {
             LoginRequestModel creds = new ObjectMapper().readValue(req.getInputStream(), LoginRequestModel.class);
-            return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(creds.getEmail(),creds.getPassword(), new ArrayDeque<>()));
+            return getAuthenticationManager().
+                    authenticate(new UsernamePasswordAuthenticationToken(creds.getEmail(),creds.getPassword(), new ArrayList<>()));
         } catch (IOException err) {
             throw new RuntimeException(err);
         }
@@ -60,6 +62,6 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
                 .signWith(SignatureAlgorithm.HS512, environment.getProperty("token.secret"))
                 .compact();
         res.addHeader("token", token);
-        res.addHeader("userId", String.valueOf(userDto.getId()));
+        res.addHeader("userId", String.valueOf(userDto.getUserId()));
     }
 }

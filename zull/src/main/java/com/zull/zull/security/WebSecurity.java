@@ -23,9 +23,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf();
         http.headers().frameOptions().disable();
         http.authorizeRequests()
-                .anyRequest().authenticated()
+                .antMatchers("jdbc:mysql://localhost:3306/cuba").permitAll()
                 .antMatchers(HttpMethod.POST, environment.getProperty("signup.path")).permitAll()
                 .antMatchers(HttpMethod.POST, environment.getProperty("login.path")).permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .addFilter(new AuthFilter(authenticationManager(), environment));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
