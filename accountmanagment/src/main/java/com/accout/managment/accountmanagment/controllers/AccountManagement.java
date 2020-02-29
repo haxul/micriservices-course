@@ -16,6 +16,8 @@ public class AccountManagement {
 
     @PostMapping
     public Account test(@RequestBody Account account) {
-        return Account.builder().age(1).id(1).name("builder").surname("ready").build();
+        Account account1 = Account.builder().age(1).id(1).name("Sergey").surname("Starodubov").build();
+        account1.show();
+        return account1;
     }
 }

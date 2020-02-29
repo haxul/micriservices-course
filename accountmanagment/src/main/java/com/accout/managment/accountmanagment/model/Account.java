@@ -2,7 +2,9 @@ package com.accout.managment.accountmanagment.model;
 
 
 import lombok.*;
+import org.springframework.mail.MailAuthenticationException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -14,4 +16,15 @@ public class Account {
     private String name;
     private String surname;
 
+    @SneakyThrows
+    public void sayHello() {
+        throw new MailAuthenticationException("exeption");
+    }
+
+    public void show() {
+           val list = new ArrayList<>();
+           list.add(1);
+           list.add(2);
+
+    }
 }
