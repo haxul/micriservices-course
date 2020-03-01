@@ -4,6 +4,8 @@ package com.accout.managment.accountmanagment.model;
 import lombok.*;
 import org.springframework.mail.MailAuthenticationException;
 
+import javax.annotation.PostConstruct;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,4 +29,5 @@ public class Account {
            list.add(2);
 
     }
+
 }
